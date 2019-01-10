@@ -19,7 +19,7 @@ namespace OdeToFood.Controllers
 
 		public IActionResult Index()
 		{
-			var model = new Restaurant { Id = 1, Name = "Scott's lasagna" };
+			var model = _restaurantData.GetAll();
 
 			return View(model);
 		}
