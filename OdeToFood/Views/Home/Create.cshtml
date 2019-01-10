@@ -1,0 +1,19 @@
+﻿@using OdeToFood.Models
+@model Restaurant
+
+<h1>Create</h1>
+
+<form method="post">
+
+	<!--El tag helper asp-for rellena automaticamente el html del 
+		input y del select con los datos del modelo actual-->
+	<input asp-for="Name"/>
+
+	<select asp-for="Cuisine" asp-items="@Html.GetEnumSelectList<CuisineType>()">
+		
+	</select>
+
+	<input type="submit" name="save" value="Save" />
+
+
+</form>
