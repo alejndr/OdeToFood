@@ -1,32 +1,18 @@
 ﻿@model OdeToFood.ViewModels.HomeIndexViewModel
 
-@{ 
+@{
 	ViewBag.Title = "Home page";
 }
 
 <h1>All restaurants</h1>
-<table>
-	@foreach (var restaurant in Model.Restaurants)
-	{
-		<tr>
-			<td>@restaurant.Id</td>
-			<td>@restaurant.Name</td>
-			<td>
 
-				<!--<a href="/home/details/@restaurant.Id">Details</a>-->
-				<!--Lo de arriba funciona pero lo de abajo es mas robusto y adaptable
-					a los cambios en el programa, pero necesita de _ViewImports para
-					funcionar.-->
-				<a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
-				<a asp-page="/Restaurants/Edit" asp-route-id="@restaurant.Id">Edit</a>
-			</td>
-		</tr>
-	}
-
-</table>
-
-<a asp-action="Create">Add Restaurant</a>
-
-@section footer {
-	@Model.CurentMessage
+@foreach (var restaurant in Model.Restaurants)
+{
+	@Html.Partial("_Summary", restaurant)
 }
+
+<div>
+	<a asp-action="Create">Add Restaurant</a>
+</div>
+
+
