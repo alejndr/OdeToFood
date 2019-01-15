@@ -67,7 +67,7 @@ namespace OdeToFood.Controllers
 				return View();
 			}
 
-			int[] array = new int[5];
+			
 		}
 	}
 }
