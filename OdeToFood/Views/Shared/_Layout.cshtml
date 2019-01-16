@@ -2,35 +2,52 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+	<meta name="viewport" content="width=device-width" />
+	<title>@ViewBag.Title</title>
+	<environment include="Development">
+		<link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+	</environment>
+
+	<environment exclude="Development">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+				asp-fallback-href="~/node_modules/bootstrap/dist/css/bootstrap.css"
+				asp-fallback-test-class="sr-only" asp-fallback-test-property="position"
+				asp-fallback-test-value="absolute"/>
+	</environment>
+
 </head>
 <body>
-    <div>
-		
-        @RenderBody()
-    </div>
-	<footer>
-		@RenderSection("footer", required:false)
-		<vc:greeter></vc:greeter>
-		@if (User.Identity.IsAuthenticated)
-		{
-			foreach (var identity in User.Identities)
-			{
-				<h3>@identity.Name</h3>
-				<ul>
-					@foreach (var claim in identity.Claims)
-					{
-						<li>@claim.Type - @claim.Value</li>
-					}
+	<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">OdeToFood</a>
+			</div>
+		</div>
+	</nav>
 
-				</ul>
-			}
-		}
-		else
-		{
-			<div>You are anonymous</div>
-		}
-	</footer>
+	<div class="container">
+
+		@RenderBody()
+		<footer>
+			@RenderSection("footer", required: false)
+			<!--<vc:greeter></vc:greeter>-->
+
+		</footer>
+	</div>
+
+	<environment include="Development">
+		<script src="~/node_modules/jquery/dist/jquery.js"></script>
+		<script src="~/node_modules/jq uery-validation/dist/jquery.validate.js"></script>
+		<script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+	</environment>
+
+	<environment exclude="Development">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+				integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+				asp-fallback-src="~/node_modules/jquery/dist/jquery.js"
+				crossorigin="anonymous"></script>
+		
+	</environment>
+
 </body>
 </html>

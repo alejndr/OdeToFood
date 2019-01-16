@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using OdeToFood.Data;
+using OdeToFood.Middleware;
 using OdeToFood.Services;
 
 namespace OdeToFood
@@ -72,16 +73,18 @@ namespace OdeToFood
 
 			app.UseStaticFiles();
 
+			app.UseNodeModules(env.ContentRootPath);
+
 			app.UseAuthentication();
 
 			app.UseMvc(ConfigureRoutes);
 			
-			app.Run(async (context) =>
-			{
-				var greeting = greeter.GetMessageOfTheDay();
-				context.Response.ContentType = "text/plain";
-				await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
-			});
+			//app.Run(async (context) =>
+			//{
+			//	var greeting = greeter.GetMessageOfTheDay();
+			//	context.Response.ContentType = "text/plain";
+			//	await context.Response.WriteAsync($"Not Found");
+			//});
 		}
 
 		private void ConfigureRoutes(IRouteBuilder routeBuilder)
